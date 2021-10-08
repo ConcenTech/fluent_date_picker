@@ -27,8 +27,8 @@ import 'popup.dart';
 ///
 /// - [DatePicker Documentation](https://pub.dev/packages/fluent_ui#date-picker)
 /// - [TimePicker](https://pub.dev/packages/fluent_ui#time-picker)
-class FluidDatePicker extends StatefulWidget {
-  const FluidDatePicker({
+class FluentDatePicker extends StatefulWidget {
+  const FluentDatePicker({
     Key? key,
     required this.selected,
     this.onChanged,
@@ -97,7 +97,7 @@ class FluidDatePicker extends StatefulWidget {
   final double popupHeight;
 
   @override
-  _FluidDatePickerState createState() => _FluidDatePickerState();
+  _FluentDatePickerState createState() => _FluentDatePickerState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -122,7 +122,7 @@ class FluidDatePicker extends StatefulWidget {
   }
 }
 
-class _FluidDatePickerState extends State<FluidDatePicker> {
+class _FluentDatePickerState extends State<FluentDatePicker> {
   late DateTime date;
   final popupKey = GlobalKey<PopUpState>();
 
@@ -168,7 +168,7 @@ class _FluidDatePickerState extends State<FluidDatePicker> {
   }
 
   @override
-  void didUpdateWidget(FluidDatePicker oldWidget) {
+  void didUpdateWidget(FluentDatePicker oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.selected != date) {
       date = widget.selected;
@@ -201,6 +201,7 @@ class _FluidDatePickerState extends State<FluidDatePicker> {
         initControllers();
       },
       builder: (context, state) {
+        print('state: $state');
         if (state.isDisabled) state = <ButtonStates>{};
         const divider = _Divider(
           direction: Axis.vertical,
@@ -252,16 +253,7 @@ class _FluidDatePickerState extends State<FluidDatePicker> {
         );
       },
     );
-    print('popupHeight ${widget.popupHeight}');
-    print('date $date');
-    print('endYear $endYear');
-    print('showDay ${widget.showDay}');
-    print('showMonth: ${widget.showMonth}');
-    print('showYear ${widget.showYear}');
-    print('startYear ${widget.startYear}');
-    print('_dayController is null: ${_dayController == null}');
-    print('_monthController is null: ${_monthController == null}');
-    print('_yearController is null: ${_yearController == null}');
+
     picker = PopUp(
       contentHeight: widget.popupHeight,
       key: popupKey,
@@ -352,6 +344,7 @@ class __DatePickerContentPopUpState extends State<_DatePickerContentPopUp> {
       direction: Axis.vertical,
       verticalMargin: EdgeInsets.zero,
       horizontalMargin: EdgeInsets.zero,
+      thickness: 0.6,
     );
 
     final highlightTileColor = theme.colorScheme.secondary;
@@ -633,7 +626,8 @@ class _Divider extends StatelessWidget {
       height: direction == Axis.horizontal ? thickness : size,
       width: direction == Axis.vertical ? thickness : size,
       margin: direction == Axis.horizontal ? horizontalMargin : verticalMargin,
-      decoration: decoration,
+      decoration:
+          decoration ?? BoxDecoration(color: Theme.of(context).dividerColor),
     );
   }
 }

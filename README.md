@@ -11,8 +11,10 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+This is a fork of [fluent_ui](https://pub.dev/packages/fluent_ui) however, 
+the only utility is the `DatePicker`
+
+All references to the fluent_ui theming has been removed and the date picker can be used as a regular `Material` widget
 
 ## Features
 
